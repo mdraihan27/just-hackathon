@@ -93,10 +93,26 @@ h1, h2, h3, h4, .heading-font {
   font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
+  align-items: center;
 }
 .nav-links a {
   color: var(--text-primary);
   text-decoration: none;
+}
+
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.mobile-only-btn {
+  display: none !important;
+}
+.desktop-only-btn {
+  display: inline-block;
 }
 
 /* Hero Section */
@@ -345,6 +361,79 @@ h1, h2, h3, h4, .heading-font {
 
 /* Responsive */
 @media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+  .nav {
+    padding: 1rem;
+    flex-wrap: wrap;
+  }
+  .nav-links {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    padding: 1rem 0;
+    text-align: center;
+    gap: 1.5rem;
+    background: var(--bg-primary);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .nav-links.active {
+    display: flex;
+  }
+  .mobile-only-btn {
+    display: inline-block !important;
+    margin: 0 auto;
+  }
+  .desktop-only-btn {
+    display: none !important;
+  }
+  .heading-font {
+    font-size: 1.2rem !important;
+  }
+  
+  h1 {
+    font-size: clamp(3rem, 12vw, 4rem) !important;
+  }
+  h2 {
+    font-size: clamp(2.5rem, 10vw, 3.5rem) !important;
+  }
+  .hero {
+    padding: 6rem 1rem 2rem;
+  }
+  .section {
+    padding: 4rem 1rem;
+  }
+  
+  /* Fix flex overlaps on mobile */
+  [style*="flex: 1 1 400px"],
+  [style*="flex: 1 1 500px"],
+  [style*="flex: 1 1 600px"] {
+    flex: 1 1 100% !important;
+  }
+  
+  [style*="grid-template-columns: 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Team form fixes */
+  .container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  .form-input, .form-select, .form-label {
+    font-size: 16px; /* Prevents iOS zoom */
+  }
+
+  .ticket-box {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+  }
+
   .prizes-grid {
     grid-template-columns: 1fr;
   }
