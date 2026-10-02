@@ -1,9 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -26,17 +28,24 @@ export default function Home() {
     <main>
       {/* Navigation */}
       <nav className="nav">
-        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+        <div className="nav-brand" style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
           <img src="/just_logo.png" alt="JUST Logo" style={{ width: "30px", height: "auto" }} />
           <span className="heading-font" style={{ fontSize: "1.5rem" }}>JUST AI HACKATHON</span>
         </div>
-        <div className="nav-links hidden md:flex">
-          <a href="#about">About</a>
-          <a href="#timeline">Timeline</a>
-          <a href="#prizes">Prizes</a>
-          <a href="#faq">FAQ</a>
+        <button className="hamburger" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+          {isMobileMenuOpen ? "✕" : "☰"}
+        </button>
+        
+        <div className={`nav-links ${isMobileMenuOpen ? "active" : ""}`}>
+          <a href="#about" onClick={() => setIsMobileMenuOpen(false)}>About</a>
+          <a href="#timeline" onClick={() => setIsMobileMenuOpen(false)}>Timeline</a>
+          <a href="#prizes" onClick={() => setIsMobileMenuOpen(false)}>Prizes</a>
+          <a href="#faq" onClick={() => setIsMobileMenuOpen(false)}>FAQ</a>
+          <Link href="/participate" className="btn-pink mobile-only-btn" onClick={() => setIsMobileMenuOpen(false)}>
+            REGISTER TODAY
+          </Link>
         </div>
-        <Link href="/participate" className="btn-pink" style={{ padding: "0.5rem 1rem", fontSize: "1rem" }}>
+        <Link href="/participate" className="btn-pink desktop-only-btn" style={{ padding: "0.5rem 1rem", fontSize: "1rem" }}>
           REGISTER TODAY
         </Link>
       </nav>
@@ -227,7 +236,7 @@ export default function Home() {
           </div>
         </div>
         
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2rem", marginTop: "2rem" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "2rem", marginTop: "2rem" }}>
           <div style={{ background: "rgba(255,255,255,0.05)", padding: "2rem", borderRadius: "8px", border: "1px solid rgba(255,255,255,0.08)" }}>
             <h3 style={{ fontSize: "1.5rem", color: "var(--accent-pink)", marginBottom: "1rem" }}>FREE AI TOOLS & REAL DEPLOYMENT</h3>
             <p style={{ fontSize: "0.9rem", color: "var(--text-secondary)", marginBottom: "0.5rem" }}>Every selected team receives a premium AI code editor subscription for the entire 2-week build period, completely free.</p>
